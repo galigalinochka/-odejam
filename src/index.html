@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="image/png" rel="icon" href='/assets/favicon.ico'>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />    
     <title>Codejam Ancient Horror</title> 
 </head>
 <body>
@@ -17,14 +20,41 @@
             <div class="ancient-card" id="card4"></div>
         </div>
         <div class="difficulty-container">
-            <button class="difficulty">Очень легкий уровень</button>
-            <button class="difficulty">Легкий уровень</button>
-            <button class="difficulty">Средний уровень</button>
-            <button class="difficulty">Высокий уровень сложности</button>
-            <button class="difficulty">Очень высокий уровень сложности</button>
+            <button class="button difficulty">Очень легкий уровень</button>
+            <button class="button difficulty press">Легкий уровень</button>
+            <button class="button difficulty">Средний уровень</button>
+            <button class="button difficulty">Высокий уровень сложности</button>
+            <button class="button difficulty">Очень высокий уровень сложности</button>
         </div>
         <div class="desk-container">
-            <span class="shuffle-button">Замешать колоду</span>
+            <button class="button shuffle-button">Замешать колоду</button>
+            <div class="current-state">
+                <div class="stage-container">
+                    <span class="stage-text">Первая стадия</span>
+                    <div class="dots-container">
+                        <div class="dot green">0</div>
+                        <div class="dot red">0</div>
+                        <div class="dot blue">0</div>
+                    </div>
+                </div>
+                <div class="stage-container">
+                    <span class="stage-text">Вторая стадия</span>
+                    <div class="dots-container">
+                        <div class="dot green">0</div>
+                        <div class="dot red">0</div>
+                        <div class="dot blue">0</div>
+                    </div>
+                </div>
+                <div class="stage-container">
+                    <span class="stage-text">Третья стадия</span>
+                    <div class="dots-container">
+                        <div class="dot green">0</div>
+                        <div class="dot red">0</div>
+                        <div class="dot blue">0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="deck back"></div>
         </div>
     </main>
     <script type="module" src='/src/index.js'></script>

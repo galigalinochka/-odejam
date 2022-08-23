@@ -2,12 +2,12 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
   }
   
   body {
     min-width: 480px;
     min-height: 100vh;
-    font-family: 'Arial', sans-serif;
     font-size: 16px;
     color: #fff;
     text-align: center;
@@ -24,10 +24,11 @@
 
 .ancients-container {
     display: flex;
-    max-width: 33%;
+    min-width: 33%;
     justify-content: space-around;
     flex-wrap: wrap;
-    align-items: stretch;
+    align-items: center;
+    height: 100vh;
 }
 
 .ancient-card {
@@ -36,10 +37,9 @@
     cursor: pointer;
     transition: 1s;
     background-size: contain;
-    align-items: center;
-    height: 100vh;
     border-radius: 5px;
     background-repeat: no-repeat;
+    border: 3px solid #f1f1f1;
 }
 
 .ancient-card:hover {
@@ -62,4 +62,112 @@
 #card4{
     background-image: url('/assets/Ancients/ShubNiggurath.png');
 }
-  
+
+.difficulty-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 33%;
+    padding: 0 20px;
+    align-items: center;
+}
+
+.button {
+    margin-bottom: 30px;
+    min-height: 60px;
+    width: 250px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+    transition: 1s;
+    cursor: pointer;
+    padding: 5px;
+    text-align: center;
+}
+
+.button:hover {
+    transform: scale(1.1);
+}
+
+.press {
+    background: purple;
+    color: white;
+}
+
+.desk-container {
+    display: flex;
+    min-width: 33%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.shuffle-button {
+    display: none;
+}
+
+.deck {
+    width: 218px;
+    height: 341px;
+    margin-bottom: 24px;
+    transform-style: preserve-3d;
+    transition: transform .5s;
+    background-repeat: no-repeat;
+}
+
+.flipped {
+    transform: rotateY(180deg);
+}
+
+.back {
+    background-image: url('/assets/mythicCardBackground.png');
+    background-size: cover;
+    transition: .3s ease-in-out;
+    cursor: pointer;
+    border-radius: 6px;
+    transform: rotateY(180deg);
+}
+
+.stage-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 30%;
+}
+
+.current-state {
+    margin-bottom: 20px;
+}
+
+.stage-text {
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.dots-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    gap: 20px;
+}
+
+.dot {
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.red {
+    background-color: red;
+}
