@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    min-width: 480px;
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    background-image: url('/assets/home.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.main {
+    display: flex;
+
+}
+
+.ancients-container {
+    display: flex;
+    max-width: 33%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.ancient-card {
+    min-width: 200px;
+    min-height: 259px;
+    cursor: pointer;
+    transition: 1s;
+    background-size: contain;
+    align-items: center;
+    height: 100vh;
+    border-radius: 5px;
+    background-repeat: no-repeat;
+}
+
+.ancient-card:hover {
+    transform: scale(1.2);
+}
+
+#card1 {
+    background-image: url('/assets/Ancients/Azathoth.png');  
+    
+}
+
+#card2 {
+    background-image: url('/assets/Ancients/Cthulthu.png');
+}
+
+#card3 {
+    background-image:url('/assets/Ancients/IogSothoth.png');
+}
+
+#card4{
+    background-image: url('/assets/Ancients/ShubNiggurath.png');
+}
+  
