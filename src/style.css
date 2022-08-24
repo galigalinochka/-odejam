@@ -46,26 +46,26 @@
     transform: scale(1.2);
 }
 
-#card1 {
+#azathoth {
     background-image: url('/assets/Ancients/Azathoth.png');  
     
 }
 
-#card2 {
+#cthulhu {
     background-image: url('/assets/Ancients/Cthulthu.png');
 }
 
-#card3 {
+#iogSothoth {
     background-image:url('/assets/Ancients/IogSothoth.png');
 }
 
-#card4{
+#shubNiggurath{
     background-image: url('/assets/Ancients/ShubNiggurath.png');
 }
 
 .difficulty-container {
+    display: none;
     height: 100vh;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     min-width: 33%;
@@ -96,7 +96,7 @@
 }
 
 .desk-container {
-    display: flex;
+    display: none;
     min-width: 33%;
     align-items: center;
     flex-direction: column;
@@ -105,9 +105,11 @@
 
 .shuffle-button {
     display: none;
+    height: 40px;
 }
 
-.deck {
+.desk {
+    display: none;
     width: 218px;
     height: 341px;
     margin-bottom: 24px;
@@ -120,7 +122,7 @@
     transform: rotateY(180deg);
 }
 
-.back {
+.desk.back {
     background-image: url('/assets/mythicCardBackground.png');
     background-size: cover;
     transition: .3s ease-in-out;
@@ -136,6 +138,7 @@
 }
 
 .current-state {
+    display: none;
     margin-bottom: 20px;
 }
 
