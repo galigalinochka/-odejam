@@ -1,4 +1,3 @@
-
 const blueCardsData = [
   {
     id: 'blue1',
