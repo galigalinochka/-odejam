@@ -119,13 +119,14 @@
 }
 
 .flipped {
-    transform: rotateY(180deg);
+    /*transform: rotateY(180deg);*/
+    background-image: url('/assets/MythicCards/blue/blue6.png');
 }
 
 .desk.back {
     background-image: url('/assets/mythicCardBackground.png');
     background-size: cover;
-    transition: .3s ease-in-out;
+    transition: .6s ease-in-out;
     cursor: pointer;
     border-radius: 6px;
     transform: rotateY(180deg);
@@ -171,6 +172,6 @@
     background-color: blue;
 }
 
-.red {
-    background-color: red;
+.brown {
+    background-color: brown;
 }
