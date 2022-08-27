@@ -13,11 +13,17 @@ console.log(ancients);*/
 
 //const ancients = document.querySelectorAll('.ancient-card');
 const ancientsContainer = document.querySelector('.ancients-container');
+const azathothCard = document.getElementById('azathoth');
+const cthulhuCard = document.getElementById('cthulhu');
+const iogSothothCard = document.getElementById('iogSothoth');
+const shubNiggurathCard = document.getElementById('shubNiggurath');
 const difficultyContainer = document.querySelector('.difficulty-container');
 const shuffleButton = document.querySelector('.shuffle-button');
 const deskContainer = document.querySelector('.desk-container');
 const currenState = document.querySelector('.current-state');
-const desk = document.querySelector('.desk.back');
+const deskBack = document.querySelector('.desk.back');
+const deskFlipped = document.querySelector('.desk.flipped');
+const desk = document.querySelector('.cards-container');
 console.log(desk);
 const difficultyButtons = document.querySelectorAll('.button.difficulty');
 //const stageContainer = document.querySelector('stage-container');
@@ -30,13 +36,14 @@ const dotBlueSecond = document.querySelector('.dot.blue.second');
 const dotGreenThird = document.querySelector('.dot.green.third');
 const dotBrownThird = document.querySelector('.dot.brown.third');
 const dotBlueThird = document.querySelector('.dot.blue.third');
+const btnOnloadGame = document.querySelector('.button.onload-game');
+
+//console.log(shubNiggurathCard);
 
 
-let ANCIENT;
 let chooseAncient = (event) => {
     if (event.target.id === 'azathoth') {
         difficultyContainer.style.display = 'flex';
-        ANCIENT = 
         getAncientCard(event);
     } if (event.target.id === 'cthulhu') {
         difficultyContainer.style.display = 'flex';
@@ -78,7 +85,7 @@ shuffleButton.addEventListener('click', showDesk);
 function showDesk() {
     currenState.style.display = 'inline';
     shuffleButton.style.display = 'none';
-    desk.style.display = 'inline';
+    desk.style.display = 'flex';
     shuffleCards();
     getDesk();
 }
@@ -97,21 +104,25 @@ function getAncientCard(event) {
             ancientMap.greenCards = Object.values(chosenAncientMap)[3].greenCards + Object.values(chosenAncientMap)[4].greenCards + Object.values(chosenAncientMap)[5].greenCards;
             ancientMap.blueCards = Object.values(chosenAncientMap)[3].blueCards + Object.values(chosenAncientMap)[4].blueCards + Object.values(chosenAncientMap)[5].blueCards;
             ancientMap.brownCards = Object.values(chosenAncientMap)[3].brownCards + Object.values(chosenAncientMap)[4].brownCards + Object.values(chosenAncientMap)[5].brownCards;
-            console.log(ancientMap);
-            console.log(chosenAncientMap);
+            azathothCard.style.transform = 'scale(1.2)';
+            //console.log(ancientMap);
+           // console.log(chosenAncientMap);
         break;
         case 'cthulhu':
             chosenAncientMap =  ancientsData[1];
             ancientMap.blueCards = Object.values(chosenAncientMap)[3].blueCards + Object.values(chosenAncientMap)[4].blueCards + Object.values(chosenAncientMap)[5].blueCards;
             ancientMap.greenCards = Object.values(chosenAncientMap)[3].greenCards + Object.values(chosenAncientMap)[4].greenCards + Object.values(chosenAncientMap)[5].greenCards;
             ancientMap.brownCards = Object.values(chosenAncientMap)[3].brownCards + Object.values(chosenAncientMap)[4].brownCards + Object.values(chosenAncientMap)[5].brownCards;
+            cthulhuCard.style.transform = 'scale(1.2)';
             console.log(ancientMap);
+            console.log(chosenAncientMap);
         break;
         case 'iogSothoth':
             chosenAncientMap =  ancientsData[2];
             ancientMap.blueCards = Object.values(chosenAncientMap)[3].blueCards + Object.values(chosenAncientMap)[4].blueCards + Object.values(chosenAncientMap)[5].blueCards;
             ancientMap.greenCards = Object.values(chosenAncientMap)[3].greenCards + Object.values(chosenAncientMap)[4].greenCards + Object.values(chosenAncientMap)[5].greenCards;
             ancientMap.brownCards = Object.values(chosenAncientMap)[3].brownCards + Object.values(chosenAncientMap)[4].brownCards + Object.values(chosenAncientMap)[5].brownCards;
+            iogSothothCard.style.transform = 'scale(1.2)';
             console.log(ancientMap);
         break;  
         case 'shubNiggurath':
@@ -119,6 +130,7 @@ function getAncientCard(event) {
             ancientMap.blueCards = Object.values(chosenAncientMap)[3].blueCards + Object.values(chosenAncientMap)[4].blueCards + Object.values(chosenAncientMap)[5].blueCards;
             ancientMap.greenCards = Object.values(chosenAncientMap)[3].greenCards + Object.values(chosenAncientMap)[4].greenCards + Object.values(chosenAncientMap)[5].greenCards;
             ancientMap.brownCards = Object.values(chosenAncientMap)[3].brownCards + Object.values(chosenAncientMap)[4].brownCards + Object.values(chosenAncientMap)[5].brownCards;
+            shubNiggurathCard.style.transform = 'scale(1.2)';
             console.log(ancientMap);
         break;  
     }
@@ -274,7 +286,7 @@ function getDesk() {
     getCardsForSecondStage();
     getCardsForThirdStage();
     getCardsStackInPlay();
-    console.log(chosenAncientMap.firstStage.greenCards);
+    console.log(chosenAncientMap);
     console.log(chosenAncientMap.firstStage.blueCards);
     console.log(chosenAncientMap.firstStage.brownCards);
 }
@@ -359,8 +371,6 @@ function getCardsForThirdStage() {
     if(brown3 > 0) {
         thirdStageCards[2] = shuffledBrownCardsStack.splice(`${-shuffledBrownCardsStack.length}`, brown3);
     } else thirdStageCards[2] = [];
-    //thirdStageCards[1] = shuffledGreenCardsStack.slice(-`${chosenAncientMap.thirdStage.greenCards}`);
-    //thirdStageCards[2] =  shuffledBrownCardsStack.slice(-`${chosenAncientMap.thirdStage.brownCards}`);
     let z = thirdStageCards.flat(Infinity);
     shuffledThirdStageCards = shuffleArray(z);
     console.log(thirdStageCards.flat(Infinity));
@@ -371,14 +381,52 @@ function getCardsForThirdStage() {
 let CardsStackInPlay;
 
 function getCardsStackInPlay() {
-    CardsStackInPlay = [...shuffledfirstStageCards, ...shuffledSecondStageCards, ...shuffledThirdStageCards];
+    CardsStackInPlay = [...shuffledThirdStageCards, ...shuffledSecondStageCards, ...shuffledfirstStageCards];
     console.log(CardsStackInPlay);
     return CardsStackInPlay;
 }
 
-desk.addEventListener('click', showCard);
+deskBack.addEventListener('click', showCard);
+
+//let dotGreenFirstCount = chosenAncientMap.firstStage.greenCards;
+//let dotBrownFirstCount = chosenAncientMap.firstStage.brownCards;
+//let dotBlueFirstCount = chosenAncientMap.firstStage.blueCards;
+//let dotGreenSecondCount = chosenAncientMap.secondStage.greenCards;
+//let dotBrownSecondCount = chosenAncientMap.secondStage.brownCards;
+//let dotBlueSecondCount = chosenAncientMap.secondStage.blueCards;
+//let dotGreenThirdCount = chosenAncientMap.thirdStage.greenCards;
+//let dotBrownThirdCount = chosenAncientMap.thirdStage.brownCards;
+//let dotBlueThirdCount = chosenAncientMap.thirdStage.blueCards;
+//console.log(dotGreenFirstCount);
+//console.log(chosenAncientMap.id);
+//console.log(shuffledfirstStageCards);
+//console.log(CardsStackInPlay.length);
 
 function showCard() {
-    desk.classList.toggle('back');
-    desk.classList.toggle('flipped');
+    //if (chosenAncientMap.id = 'azathoth'){
+        //if(shuffledfirstStageCards > 0) { 
+            if(CardsStackInPlay.length > 0) {
+                let link = CardsStackInPlay[CardsStackInPlay.length-1].cardFace;
+                deskFlipped.style.backgroundImage = `url(${link})`;
+                CardsStackInPlay.pop();
+               // if (shuffledfirstStageCards[shuffledfirstStageCards.length].color = 'green') {
+
+                //}
+                console.log(CardsStackInPlay);
+                //console.log(chosenAncientMap.firstStage.length);
+    //} 
+    
+    } else {
+        console.log('их ноль');
+        deskBack.style.display = 'none';
+        deskFlipped.style.alignSelf = 'flex-end';
+       // btnOnloadGame.style.display = 'inline';
+    }
+//}
+
+    return CardsStackInPlay;
 }
+
+btnOnloadGame.addEventListener('click', () => location.reload());
+
+

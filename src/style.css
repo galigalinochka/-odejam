@@ -68,7 +68,7 @@
     height: 100vh;
     flex-direction: column;
     justify-content: center;
-    min-width: 33%;
+    min-width: 25%;
     padding: 0 20px;
     align-items: center;
 }
@@ -95,12 +95,11 @@
     color: white;
 }
 
-.desk-container {
-    display: none;
-    min-width: 33%;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+.cards-container {
+    display: flex;
+    width: 400px;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .shuffle-button {
@@ -108,34 +107,41 @@
     height: 40px;
 }
 
-.desk {
+.desk-container {
     display: none;
-    width: 218px;
-    height: 341px;
-    margin-bottom: 24px;
-    transform-style: preserve-3d;
-    transition: transform .5s;
+    min-width: 33%;
+    align-items: center;
+    /*flex-direction: column;*/
+    justify-content: center;
+}
+
+.desk {
+    width: 180px;
+    height: 281px;
     background-repeat: no-repeat;
-}
-
-.flipped {
-    /*transform: rotateY(180deg);*/
-    background-image: url('/assets/MythicCards/blue/blue6.png');
-}
-
-.desk.back {
-    background-image: url('/assets/mythicCardBackground.png');
     background-size: cover;
     transition: .6s ease-in-out;
     cursor: pointer;
     border-radius: 6px;
-    transform: rotateY(180deg);
 }
+
+.desk.flipped {
+    /*background-image: url('/assets/MythicCards/blue/blue6.png');*/
+    border: 2px solid purple;
+   
+}
+
+.desk.back {
+    background-image: url('/assets/mythicCardBackground.png');
+}
+
 
 .stage-container {
     display: flex;
     flex-direction: column;
     min-height: 30%;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
 .current-state {
@@ -174,4 +180,8 @@
 
 .brown {
     background-color: brown;
+}
+
+.button.onload-game {
+    background-color: purple;
 }
