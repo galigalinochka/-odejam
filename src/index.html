@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="image/png" rel="icon" href='/assets/favicon.ico'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />    
+    <title>Codejam Ancient Horror</title> 
+</head>
+<body>
+    <main class="main">
+        <div class="ancients-container">
+            <div class="ancient-card" id="azathoth"></div>
+            <div class="ancient-card" id="cthulhu"></div>
+            <div class="ancient-card" id="iogSothoth"></div>
+            <div class="ancient-card" id="shubNiggurath"></div>
+        </div>
+        <div class="difficulty-container">
+            <button class="button difficulty" id = "very easy">Очень легкий уровень</button>
+            <button class="button difficulty" id = "easy">Легкий уровень</button>
+            <button class="button difficulty" id = "normal">Средний уровень</button>
+            <button class="button difficulty" id = "hard">Высокий уровень сложности</button>
+            <button class="button difficulty" id = "very hard">Очень высокий уровень сложности</button>
+        </div>
+        
+        <div class="desk-container">
+            <button class="button shuffle-button">Замешать колоду</button>
+            <div class="current-state">
+                <div class="stage-container">
+                    <span class="stage-text">Первая стадия</span>
+                    <div class="dots-container">
+                        <div class="dot green first">0</div>
+                        <div class="dot blue first">0</div>
+                        <div class="dot brown first">0</div>
+                    </div>
+                </div>
+                <div class="stage-container">
+                    <span class="stage-text">Вторая стадия</span>
+                    <div class="dots-container">
+                        <div class="dot green second">0</div>
+                        <div class="dot blue second">0</div>
+                        <div class="dot brown second">0</div>
+                    </div>
+                </div>
+                <div class="stage-container">
+                    <span class="stage-text">Третья стадия</span>
+                    <div class="dots-container">
+                        <div class="dot green third">0</div>
+                        <div class="dot blue third">0</div>
+                        <div class="dot brown third">0</div>
+                    </div>
+                </div>
+                <div class="cards-container">
+                    <div class="desk flipped"></div>
+                    <div class="desk back"></div>
+                </div>
+                <button class="button onload-game">Начать новую игру</button>
+            </div>
+            
+        </div>
+    </main>
+    <script type="module" src='/src/main.js'></script>
+    <script type="module" src="/data/ancients.js"></script>
+    <script type="module" src="/data/difficulties.js"></script>
+    <script type="module" src='/data/mythicCards/blue/index.js'></script>
+    <script type="module" src='/data/mythicCards/brown/index.js'></script>
+    <script type="module" src='/data/mythicCards/green/index.js'></script>
+</body>
+</html>
