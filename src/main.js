@@ -4,8 +4,14 @@ import blueCardsData from "../data/mythicCards/blue/index.js";
 import brownCardsData from "../data/mythicCards/brown/index.js";
 import greenCardsData from "../data/mythicCards/green/index.js";
 
-/*console.log(ancientsData);
-console.log(difficulties);
+console.log(`Сомооценка: 65 баллов
+На текущий момент реализован только Очень легкий уровень сложности, остальные очень постараюсь добработать до 31 августа.
+1. Карты Древнего + 20 (в консоль выводится информация о Древнем, на карту которого был сделан клик);
+2.На выбор предоставляется несколько уровней сложности (максимум 5) + 5 (реализован только Очень легкий уровень сложности)
+3. Карты замешиваются согласно правилам игры + 40
+3. Есть трекер текущего состояния колоды - 0 баллов`);
+
+/*console.log(difficulties);
 console.log(blueCardsData);
 console.log(browmCardsData);
 console.log(greenCardsData);
@@ -73,33 +79,21 @@ difficultyContainer.addEventListener('click', event => {
         currenState.style.display = 'none';
         desk.style.display = 'none';
         event.target.classList.add('press');
-        getDifficultyLevel(event);
-    }
-    
+        getDifficultyLevel(event); // функция отрабатывает при клике по контейнеру с 
+        //уровнями сложности, возвращает массив, в котором указывается {id: 'very easy', name: 'Очень легкий уровень'},
+    }    
 })
-
-shuffleButton.addEventListener('click', showDesk);
-
-function showDesk() {
-    currenState.style.display = 'inline';
-    shuffleButton.style.display = 'none';
-    desk.style.display = 'flex';
-    let level = getDifficultyLevel(event);
-    if(level.id === 'very easy') {
-    shuffleCardsEasy();
-    } else {console.log('выбран другой уровень')}
-
-    getDesk();
-
-}
 
 function getDifficultyLevel(event) {
     switch (event.target.id) {
         case 'very easy':
+            console.log(`Выбран уровень: ${difficulties[0].id} ▼`);
+            console.log(difficulties[0]);
             getBlueCardStackEasy(); //получаем массив с картами по уровню сложности
             getGreenCardStackEasy();
             getBrownCardStackEasy();
-            return difficulties[0];
+            
+            return difficulties[0]; //{id: 'very easy', name: 'Очень легкий уровень'}
      
         case 'easy':
             
@@ -123,11 +117,24 @@ function getDifficultyLevel(event) {
             getBlueCardStackHard();
             getGreenCardStackHard();
             getBrownCardStackHard();
-            return difficulties[4];
-           
+            return difficulties[4];      
     }
-
 }
+
+shuffleButton.addEventListener('click', showDesk);
+
+function showDesk() {
+    currenState.style.display = 'inline';
+    shuffleButton.style.display = 'none';
+    desk.style.display = 'flex';
+    //console.log(event);
+    //if(level.id === 'very easy') {
+    shuffleCardsEasy();
+   // } else {console.log('выбран другой уровень')}
+    getDesk();
+}
+
+
 
 //Определение состава карт
 
@@ -145,16 +152,17 @@ function getAncientCard(event) {
             ancientMap.brownCards = Object.values(chosenAncientMap)[3].brownCards + Object.values(chosenAncientMap)[4].brownCards + Object.values(chosenAncientMap)[5].brownCards;
             azathothCard.style.transform = 'scale(1.2)';
             //console.log(ancientMap);
-           // console.log(chosenAncientMap);
-        break;
+           console.log(`Выбран Древний со следующими данными: name - ${chosenAncientMap.id} ▼`);
+           console.log(chosenAncientMap);
+        break; 
         case 'cthulhu':
             chosenAncientMap =  ancientsData[1];
             ancientMap.blueCards = Object.values(chosenAncientMap)[3].blueCards + Object.values(chosenAncientMap)[4].blueCards + Object.values(chosenAncientMap)[5].blueCards;
             ancientMap.greenCards = Object.values(chosenAncientMap)[3].greenCards + Object.values(chosenAncientMap)[4].greenCards + Object.values(chosenAncientMap)[5].greenCards;
             ancientMap.brownCards = Object.values(chosenAncientMap)[3].brownCards + Object.values(chosenAncientMap)[4].brownCards + Object.values(chosenAncientMap)[5].brownCards;
             cthulhuCard.style.transform = 'scale(1.2)';
-            console.log(ancientMap);
-            console.log(chosenAncientMap);
+            console.log(`Выбран Древний со следующими данными: name - ${chosenAncientMap.id} ▼`);
+           console.log(chosenAncientMap);
         break;
         case 'iogSothoth':
             chosenAncientMap =  ancientsData[2];
@@ -162,7 +170,8 @@ function getAncientCard(event) {
             ancientMap.greenCards = Object.values(chosenAncientMap)[3].greenCards + Object.values(chosenAncientMap)[4].greenCards + Object.values(chosenAncientMap)[5].greenCards;
             ancientMap.brownCards = Object.values(chosenAncientMap)[3].brownCards + Object.values(chosenAncientMap)[4].brownCards + Object.values(chosenAncientMap)[5].brownCards;
             iogSothothCard.style.transform = 'scale(1.2)';
-            console.log(ancientMap);
+            console.log(`Выбран Древний со следующими данными: name - ${chosenAncientMap.id} ▼`);
+            console.log(chosenAncientMap);
         break;  
         case 'shubNiggurath':
             chosenAncientMap =  ancientsData[3];
@@ -170,7 +179,8 @@ function getAncientCard(event) {
             ancientMap.greenCards = Object.values(chosenAncientMap)[3].greenCards + Object.values(chosenAncientMap)[4].greenCards + Object.values(chosenAncientMap)[5].greenCards;
             ancientMap.brownCards = Object.values(chosenAncientMap)[3].brownCards + Object.values(chosenAncientMap)[4].brownCards + Object.values(chosenAncientMap)[5].brownCards;
             shubNiggurathCard.style.transform = 'scale(1.2)';
-            console.log(ancientMap);
+            console.log(`Выбран Древний со следующими данными: name - ${chosenAncientMap.id} ▼`);
+            console.log(chosenAncientMap);
         break;  
     }
     return `${ancientMap} ${chosenAncientMap}`;
@@ -215,9 +225,9 @@ let greenCardsStackHard = shuffleGreenCards.filter(item => item.difficulty === '
 let brownCardsStackHard = shuffleBrownCards.filter(item => item.difficulty === 'hard');
 
 
-console.log(blueCardsStackHard);
-console.log(greenCardsStackHard);
-console.log(brownCardsStackHard);
+//console.log(blueCardsStackHard);
+//console.log(greenCardsStackHard);
+//console.log(brownCardsStackHard);
 
 // Очень легкий уровень - формируем стопки карт
 
@@ -233,6 +243,7 @@ function getBlueCardStackEasy() {
         sliceFromNormal = brownCardsStackNormal.slice(0, notEnoughCount);
         newBlueStackEasy = blueCardsStackEasy.concat(sliceFromNormal);
     }
+    console.log(`Из общего набора карт выбраны карты согласно выбранной сложности: СИНИЕ ▼`);
     console.log(newBlueStackEasy);
     return newBlueStackEasy;    
 }
@@ -249,6 +260,7 @@ function getGreenCardStackEasy() {
         sliceFromNormal = brownCardsStackNormal.slice(0, notEnoughCount);
         newGreenStackEasy = greenCardsStackEasy.concat(sliceFromNormal);
      }
+     console.log(`Из общего набора карт выбраны карты согласно выбранной сложности: ЗЕЛЕНЫЕ ▼`);
      console.log(newGreenStackEasy);
      return newGreenStackEasy;
  }
@@ -266,13 +278,14 @@ function getGreenCardStackEasy() {
         newBrownStackEasy = brownCardsStackEasy.concat(sliceFromNormal);
        
     }
+    console.log(`Из общего набора карт выбраны карты согласно выбранной сложности: КОРИЧНЕВЫЕ ▼`);
      console.log(newBrownStackEasy);
      return newBrownStackEasy;
  }
 
  //Очень высокий уровень сложности - формируем стопки карт
 
- let newBlueStackHard = [];
+ /*let newBlueStackHard = [];
  function getBlueCardStackHard() {
      
      let notEnoughCount;
@@ -318,7 +331,7 @@ function getGreenCardStackEasy() {
      }
       console.log(newBrownStackHard);
       return newBrownStackEasy;
-  }
+  }*/
  
 
 //let secondShuffleGreenCards = shuffleArray(newGreenStack);
@@ -329,36 +342,27 @@ let shuffledGreenCardsStackEasy;
 let shuffledBrownCardsStackEasy;
 
 function shuffleCardsEasy() {
-    //let BlueCardsStack = getBlueCardStackEasy();
-    shuffledBlueCardsStackEasy = shuffleArray(newBlueStackEasy);
+    let secondBlueCardsStackEasy = getBlueCardStackEasy();
+    shuffledBlueCardsStackEasy = shuffleArray(secondBlueCardsStackEasy);
 
-    //let secondBlueCardsStackHard = getBlueCardStackHard();
-    //shuffledBlueCardsStackHard = shuffleArray(secondBlueCardsStackHard);
+    let secondGreenCardsStackEasy = getGreenCardStackEasy();
+    shuffledGreenCardsStackEasy = shuffleArray(secondGreenCardsStackEasy);
 
-    //let secondGreenCardsStackEasy = getGreenCardStackEasy();
-    shuffledGreenCardsStackEasy = shuffleArray(newGreenStackEasy);
-
-    //let secondGreenCardsStackHard = getGreenCardStackHard();
-    //shuffledGreenCardsStackHard = shuffleArray(secondGreenCardsStackHard);
-
-    //let secondBrownCardsStackEasy = getBrownCardStackEasy();
-    shuffledBrownCardsStackEasy = shuffleArray(newBrownStackEasy);
-
-    //let secondBrownCardsStackHard = getBrownCardStackHard();
-    //shuffledBrownCardsStackHard = shuffleArray(arr);
-
+    let secondBrownCardsStackEasy = getBrownCardStackEasy();
+    shuffledBrownCardsStackEasy = shuffleArray(secondBrownCardsStackEasy);
+    console.log('Отобранные карты перемешиваются отдельно ▼');
     console.log(shuffledBlueCardsStackEasy);
-    console.log(shuffledGreenCardsStackHard);
-    console.log(shuffledBrownCardsStackHard);
+    console.log(shuffledGreenCardsStackEasy);
+    console.log(shuffledBrownCardsStackEasy);
 
     return `${shuffledBlueCardsStackEasy} ${shuffledGreenCardsStackEasy} ${shuffledBrownCardsStackEasy}`;   
 }
 
-let shuffledBlueCardsStackHard;
+/*let shuffledBlueCardsStackHard;
 let shuffledGreenCardsStackHard;
-let shuffledBrownCardsStackHard;
+let shuffledBrownCardsStackHard;*/
 
-function shuffleCardsHard() {
+/*function shuffleCardsHard() {
 
     shuffledBlueCardsStackHard = shuffleArray(newBlueStackHard);
 
@@ -371,7 +375,7 @@ function shuffleCardsHard() {
     console.log(shuffledBrownCardsStackHard);
 
     return `${shuffledBlueCardsStackHard} ${shuffledGreenCardsStackHard} ${shuffledBrownCardsStackHard}`;   
-}
+}*/
 
 
 function getDesk() {
@@ -390,9 +394,6 @@ function getDesk() {
     getCardsForSecondStage();
     getCardsForThirdStage();
     getCardsStackInPlay();
-    console.log(chosenAncientMap);
-    console.log(chosenAncientMap.firstStage.blueCards);
-    console.log(chosenAncientMap.firstStage.brownCards);
 }
 
 let firstStageCards = [];
@@ -408,11 +409,11 @@ function getCardsForFirstStage() {
     let blue1 = chosenAncientMap.firstStage.blueCards;
     let green1 = chosenAncientMap.firstStage.greenCards;
     let brown1 = chosenAncientMap.firstStage.brownCards;
-    //прописать условие
+    
     if (blue1 > 0) {
        // firstStageCards[0] = shuffledBlueCardsStack.slice(-`${chosenAncientMap.firstStage.blueCards}`);
        firstStageCards[0] = shuffledBlueCardsStackEasy.splice(`${-shuffledBlueCardsStackEasy.length}`, blue1);
-       console.log(firstStageCards[0]);
+       //console.log(firstStageCards[0]);
     } else firstStageCards[0] = [];
         
     if (green1 > 0) {
@@ -428,7 +429,7 @@ function getCardsForFirstStage() {
     
     let x = firstStageCards.flat(Infinity);
     shuffledfirstStageCardsEasy = shuffleArray(x);
-    console.log(firstStageCards.flat(Infinity));
+    console.log('Сформированы карты для первого этапа игры, стопка отдельно перемешана ▼');
     console.log(shuffledfirstStageCardsEasy);
     return shuffledfirstStageCardsEasy;
 }
@@ -454,7 +455,8 @@ function getCardsForSecondStage() {
     
     let y = secondStageCards.flat(Infinity);
     shuffledSecondStageCardsEasy = shuffleArray(y);
-    console.log(secondStageCards.flat(Infinity));
+    //console.log(secondStageCards.flat(Infinity));
+    console.log('Сформированы карты для второго этапа игры, стопка отдельно перемешана ▼');
     console.log(shuffledSecondStageCardsEasy);
     return shuffledSecondStageCardsEasy;
     
@@ -478,7 +480,8 @@ function getCardsForThirdStage() {
     } else thirdStageCards[2] = [];
     let z = thirdStageCards.flat(Infinity);
     shuffledThirdStageCardsEasy = shuffleArray(z);
-    console.log(thirdStageCards.flat(Infinity));
+    //console.log(thirdStageCards.flat(Infinity));
+    console.log('Сформированы карты для третьего этапа игры, стопка отдельно перемешана ▼');
     console.log(shuffledThirdStageCardsEasy);
     return shuffledThirdStageCardsEasy;
 }
@@ -487,6 +490,7 @@ let CardsStackInPlayEasy;
 
 function getCardsStackInPlay() {
     CardsStackInPlayEasy = [...shuffledThirdStageCardsEasy, ...shuffledSecondStageCardsEasy, ...shuffledfirstStageCardsEasy];
+    console.log('Сформирована стопка карт для игры, карты из первого этапа входят в игру первыми ▼');
     console.log(CardsStackInPlayEasy);
     return CardsStackInPlayEasy;
 }
@@ -517,6 +521,7 @@ function showCard() {
                // if (shuffledfirstStageCards[shuffledfirstStageCards.length].color = 'green') {
 
                 //}
+                console.log('Карты входят в игру по одной.')
                 console.log(CardsStackInPlayEasy);
                 //console.log(chosenAncientMap.firstStage.length);
     //} 
