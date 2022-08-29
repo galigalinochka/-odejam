@@ -24,7 +24,6 @@ const currenState = document.querySelector('.current-state');
 const deskBack = document.querySelector('.desk.back');
 const deskFlipped = document.querySelector('.desk.flipped');
 const desk = document.querySelector('.cards-container');
-console.log(desk);
 const difficultyButtons = document.querySelectorAll('.button.difficulty');
 //const stageContainer = document.querySelector('stage-container');
 const dotGreenFirst = document.querySelector('.dot.green.first');
@@ -37,8 +36,6 @@ const dotGreenThird = document.querySelector('.dot.green.third');
 const dotBrownThird = document.querySelector('.dot.brown.third');
 const dotBlueThird = document.querySelector('.dot.blue.third');
 const btnOnloadGame = document.querySelector('.button.onload-game');
-
-//console.log(shubNiggurathCard);
 
 
 let chooseAncient = (event) => {
@@ -78,6 +75,7 @@ difficultyContainer.addEventListener('click', event => {
         event.target.classList.add('press');
         getDifficultyLevel(event);
     }
+    
 })
 
 shuffleButton.addEventListener('click', showDesk);
@@ -86,8 +84,49 @@ function showDesk() {
     currenState.style.display = 'inline';
     shuffleButton.style.display = 'none';
     desk.style.display = 'flex';
-    shuffleCards();
+    let level = getDifficultyLevel(event);
+    if(level.id === 'very easy') {
+    shuffleCardsEasy();
+    } else {console.log('выбран другой уровень')}
+
     getDesk();
+
+}
+
+function getDifficultyLevel(event) {
+    switch (event.target.id) {
+        case 'very easy':
+            getBlueCardStackEasy(); //получаем массив с картами по уровню сложности
+            getGreenCardStackEasy();
+            getBrownCardStackEasy();
+            return difficulties[0];
+     
+        case 'easy':
+            
+            console.log(difficulties[1]);
+            return difficulties[1];
+            
+        case 'normal':
+            
+            console.log(difficulties[2]);
+            return difficulties[2];
+            
+        case 'hard': 
+            
+            
+            console.log(difficulties[3]);
+            return difficulties[3];
+           
+        case 'very hard':
+            
+            console.log(difficulties[4]);
+            getBlueCardStackHard();
+            getGreenCardStackHard();
+            getBrownCardStackHard();
+            return difficulties[4];
+           
+    }
+
 }
 
 //Определение состава карт
@@ -137,36 +176,14 @@ function getAncientCard(event) {
     return `${ancientMap} ${chosenAncientMap}`;
 }
 
-function getDifficultyLevel(event) {
-    switch (event.target.id) {
-        case 'very easy':
-            console.log(difficulties[0]);
-            getBlueCardStack();
-            getGreenCardStack();
-            getBrownCardStack();
-            break;
-        case 'easy':
-            console.log(difficulties[1]);
-            break;
-        case 'normal':
-            console.log(difficulties[2]);
-            break;
-        case 'hard': 
-            console.log(difficulties[3]);
-            break;
-            case 'very hard':
-            console.log(difficulties[4]);
-            break;
-    }
 
-}
 
-function getSet(blueCardsData, greenCardsData, brownCardsData) {
+/*function getSet(blueCardsData, greenCardsData, brownCardsData) {
     console.log('Создание набора для игры');
     console.log(ancientMap);
-}
+}*/
 
-//Перемешиваем колоды карт по цветам
+//Перемешивание
 
 function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -193,82 +210,169 @@ let blueCardsStackNormal = shuffleBlueCards.filter(item => item.difficulty === '
 let greenCardsStackNormal = shuffleGreenCards.filter(item => item.difficulty === 'normal');
 let brownCardsStackNormal = shuffleBrownCards.filter(item => item.difficulty === 'normal');
 
-/*console.log(blueCardsStackNormal);
-console.log(greenCardsStackNormal);
-console.log(brownCardsStackNormal);*/
+let blueCardsStackHard = shuffleBlueCards.filter(item => item.difficulty === 'hard');
+let greenCardsStackHard = shuffleGreenCards.filter(item => item.difficulty === 'hard');
+let brownCardsStackHard = shuffleBrownCards.filter(item => item.difficulty === 'hard');
 
-// Очень легкий
 
-function getBlueCardStack() {
-    let newBlueStack;
+console.log(blueCardsStackHard);
+console.log(greenCardsStackHard);
+console.log(brownCardsStackHard);
+
+// Очень легкий уровень - формируем стопки карт
+
+let newBlueStackEasy = [];
+function getBlueCardStackEasy() {
+    
     let notEnoughCount;
     let sliceFromNormal;
     if (blueCardsStackEasy.length >= ancientMap.blueCards) {
-        newBlueStack = blueCardsStackEasy.slice(0, ancientMap.blueCards);
+        newBlueStackEasy = blueCardsStackEasy.slice(0, ancientMap.blueCards);
     } else {
         notEnoughCount = ancientMap.blueCards - blueCardsStackEasy.length;
         sliceFromNormal = brownCardsStackNormal.slice(0, notEnoughCount);
-        newBlueStack = blueCardsStackEasy.concat(sliceFromNormal);
+        newBlueStackEasy = blueCardsStackEasy.concat(sliceFromNormal);
     }
-    console.log(newBlueStack);
-    return newBlueStack;    
+    console.log(newBlueStackEasy);
+    return newBlueStackEasy;    
 }
 
-let newGreenStack = [];
-function getGreenCardStack() {
+let newGreenStackEasy = [];
+function getGreenCardStackEasy() {
      
      let notEnoughCount;
      let sliceFromNormal;
      if (greenCardsStackEasy.length >= ancientMap.greenCards) {
-     newGreenStack = greenCardsStackEasy.slice(0, ancientMap.greenCards);
+     newGreenStackEasy = greenCardsStackEasy.slice(0, ancientMap.greenCards);
      } else {
         notEnoughCount = ancientMap.greenCards - greenCardsStackEasy.length;
         sliceFromNormal = brownCardsStackNormal.slice(0, notEnoughCount);
-        newGreenStack = greenCardsStackEasy.concat(sliceFromNormal);
+        newGreenStackEasy = greenCardsStackEasy.concat(sliceFromNormal);
      }
-     console.log(newGreenStack);
-     return newGreenStack;
+     console.log(newGreenStackEasy);
+     return newGreenStackEasy;
  }
 
- let newBrownStack = [];
- function getBrownCardStack() {
+ let newBrownStackEasy = [];
+ function getBrownCardStackEasy() {
     let notEnoughCount;
     let sliceFromNormal;
     if (brownCardsStackEasy.length >= ancientMap.brownCards) {
-        newBrownStack = brownCardsStackEasy.slice(0, ancientMap.brownCards);
+        newBrownStackEasy = brownCardsStackEasy.slice(0, ancientMap.brownCards);
         console.log(newBrownStack);
     } else {
         notEnoughCount = ancientMap.brownCards - brownCardsStackEasy.length;
         sliceFromNormal = brownCardsStackNormal.slice(0, notEnoughCount);
-        newBrownStack = brownCardsStackEasy.concat(sliceFromNormal);
+        newBrownStackEasy = brownCardsStackEasy.concat(sliceFromNormal);
        
     }
-     console.log(newBrownStack);
-     return newBrownStack;
+     console.log(newBrownStackEasy);
+     return newBrownStackEasy;
  }
+
+ //Очень высокий уровень сложности - формируем стопки карт
+
+ let newBlueStackHard = [];
+ function getBlueCardStackHard() {
+     
+     let notEnoughCount;
+     let sliceFromNormal;
+     if (blueCardsStackHard.length >= ancientMap.blueCards) {
+         newBlueStackHard = blueCardsStackHard.slice(0, ancientMap.blueCards);
+     } else {
+         notEnoughCount = ancientMap.blueCards - blueCardsStackHard.length;
+         sliceFromNormal = brownCardsStackNormal.slice(0, notEnoughCount);
+         newBlueStackHard = blueCardsStackHard.concat(sliceFromNormal);
+     }
+     console.log(newBlueStackHard);
+     return newBlueStackHard;    
+ }
+ 
+ let newGreenStackHard = [];
+ function getGreenCardStackHard() {
+      
+      let notEnoughCount;
+      let sliceFromNormal;
+      if (greenCardsStackHard.length >= ancientMap.greenCards) {
+      newGreenStackHard  = greenCardsStackHard.slice(0, ancientMap.greenCards);
+      } else {
+         notEnoughCount = ancientMap.greenCards - greenCardsStackHard.length;
+         sliceFromNormal = brownCardsStackNormal.slice(0, notEnoughCount);
+         newGreenStackHard = greenCardsStackHard.concat(sliceFromNormal);
+      }
+      console.log(newGreenStackHard);
+      return newGreenStackHard;
+  }
+ 
+  let newBrownStackHard = [];
+  function getBrownCardStackHard() {
+     let notEnoughCount;
+     let sliceFromNormal;
+     if (brownCardsStackHard.length >= ancientMap.brownCards) {
+         newBrownStackHard = brownCardsStackHard.slice(0, ancientMap.brownCards);
+         console.log(newBrownStackHard);
+     } else {
+         notEnoughCount = ancientMap.brownCards - brownCardsStackHard.length;
+         sliceFromNormal = brownCardsStackNormal.slice(0, notEnoughCount);
+         newBrownStackHard = brownCardsStackHard.concat(sliceFromNormal);
+     }
+      console.log(newBrownStackHard);
+      return newBrownStackEasy;
+  }
  
 
 //let secondShuffleGreenCards = shuffleArray(newGreenStack);
 //let secondShuffleBrownCards = shuffleArray(newBrownStack);
 
-let shuffledBlueCardsStack;
-let shuffledGreenCardsStack;
-let shuffledBrownCardsStack;
-function shuffleCards() {
-    let secondBlueCardsStack = getBlueCardStack();
-    shuffledBlueCardsStack = shuffleArray(secondBlueCardsStack);
-    let secondGreenCardsStack = getGreenCardStack();
-    shuffledGreenCardsStack = shuffleArray(secondGreenCardsStack);
-    let secondBrownCardsStack = getBrownCardStack();
-    shuffledBrownCardsStack = shuffleArray(secondBrownCardsStack);
+let shuffledBlueCardsStackEasy;
+let shuffledGreenCardsStackEasy;
+let shuffledBrownCardsStackEasy;
 
-    console.log(shuffledBlueCardsStack);
-    console.log(shuffledGreenCardsStack);
-    console.log(shuffledBrownCardsStack);
+function shuffleCardsEasy() {
+    //let BlueCardsStack = getBlueCardStackEasy();
+    shuffledBlueCardsStackEasy = shuffleArray(newBlueStackEasy);
 
-    return `${shuffledBlueCardsStack} ${shuffledGreenCardsStack} ${shuffledBrownCardsStack}`;
-    
+    //let secondBlueCardsStackHard = getBlueCardStackHard();
+    //shuffledBlueCardsStackHard = shuffleArray(secondBlueCardsStackHard);
+
+    //let secondGreenCardsStackEasy = getGreenCardStackEasy();
+    shuffledGreenCardsStackEasy = shuffleArray(newGreenStackEasy);
+
+    //let secondGreenCardsStackHard = getGreenCardStackHard();
+    //shuffledGreenCardsStackHard = shuffleArray(secondGreenCardsStackHard);
+
+    //let secondBrownCardsStackEasy = getBrownCardStackEasy();
+    shuffledBrownCardsStackEasy = shuffleArray(newBrownStackEasy);
+
+    //let secondBrownCardsStackHard = getBrownCardStackHard();
+    //shuffledBrownCardsStackHard = shuffleArray(arr);
+
+    console.log(shuffledBlueCardsStackEasy);
+    console.log(shuffledGreenCardsStackHard);
+    console.log(shuffledBrownCardsStackHard);
+
+    return `${shuffledBlueCardsStackEasy} ${shuffledGreenCardsStackEasy} ${shuffledBrownCardsStackEasy}`;   
 }
+
+let shuffledBlueCardsStackHard;
+let shuffledGreenCardsStackHard;
+let shuffledBrownCardsStackHard;
+
+function shuffleCardsHard() {
+
+    shuffledBlueCardsStackHard = shuffleArray(newBlueStackHard);
+
+    shuffledGreenCardsStackHard = shuffleArray(newGreenStackHard);
+
+    shuffledBrownCardsStackHard = shuffleArray(newBrownStackHard);
+
+    console.log(shuffledBlueCardsStackHard);
+    console.log(shuffledGreenCardsStackHard);
+    console.log(shuffledBrownCardsStackHard);
+
+    return `${shuffledBlueCardsStackHard} ${shuffledGreenCardsStackHard} ${shuffledBrownCardsStackHard}`;   
+}
+
 
 function getDesk() {
     dotGreenFirst.innerHTML = chosenAncientMap.firstStage.greenCards;
@@ -295,37 +399,38 @@ let firstStageCards = [];
 let secondStageCards = [];
 let thirdStageCards = [];
 
-let shuffledfirstStageCards;
-let shuffledSecondStageCards;
-let shuffledThirdStageCards;
+let shuffledfirstStageCardsEasy;
+let shuffledSecondStageCardsEasy;
+let shuffledThirdStageCardsEasy;
 
 
 function getCardsForFirstStage() {
     let blue1 = chosenAncientMap.firstStage.blueCards;
     let green1 = chosenAncientMap.firstStage.greenCards;
     let brown1 = chosenAncientMap.firstStage.brownCards;
+    //прописать условие
     if (blue1 > 0) {
        // firstStageCards[0] = shuffledBlueCardsStack.slice(-`${chosenAncientMap.firstStage.blueCards}`);
-       firstStageCards[0] = shuffledBlueCardsStack.splice(`${-shuffledBlueCardsStack.length}`, blue1);
+       firstStageCards[0] = shuffledBlueCardsStackEasy.splice(`${-shuffledBlueCardsStackEasy.length}`, blue1);
        console.log(firstStageCards[0]);
     } else firstStageCards[0] = [];
         
     if (green1 > 0) {
         //firstStageCards[1] = shuffledGreenCardsStack.slice(-`${chosenAncientMap.firstStage.greenCards}`);
-        firstStageCards[1] = shuffledGreenCardsStack.splice(`${-shuffledGreenCardsStack.length}`, green1);
+        firstStageCards[1] = shuffledGreenCardsStackEasy.splice(`${-shuffledGreenCardsStackEasy.length}`, green1);
     } else firstStageCards[1] = [];
 
     if (brown1 > 0) {    
-        firstStageCards[2] = shuffledBrownCardsStack.splice(`${-shuffledBrownCardsStack.length}`, brown1)
+        firstStageCards[2] = shuffledBrownCardsStackEasy.splice(`${-shuffledBrownCardsStackEasy.length}`, brown1)
     //firstStageCards[2] =  shuffledBrownCardsStack.slice(-`${chosenAncientMap.firstStage.brownCards}`);
     } else firstStageCards[2] = [];
     
     
     let x = firstStageCards.flat(Infinity);
-    shuffledfirstStageCards = shuffleArray(x);
+    shuffledfirstStageCardsEasy = shuffleArray(x);
     console.log(firstStageCards.flat(Infinity));
-    console.log(shuffledfirstStageCards);
-    return shuffledfirstStageCards;
+    console.log(shuffledfirstStageCardsEasy);
+    return shuffledfirstStageCardsEasy;
 }
 
 function getCardsForSecondStage() {
@@ -333,25 +438,25 @@ function getCardsForSecondStage() {
     let green2 = chosenAncientMap.secondStage.greenCards;
     let brown2 = chosenAncientMap.secondStage.brownCards;
     if (blue2 > 0) {
-        secondStageCards[0] = shuffledBlueCardsStack.splice(`${-shuffledGreenCardsStack.length}`, blue2);
+        secondStageCards[0] = shuffledBlueCardsStackEasy.splice(`${-shuffledGreenCardsStackEasy.length}`, blue2);
        // secondStageCards[0] = shuffledBlueCardsStack.slice(-`${chosenAncientMap.secondStage.blueCards}`);
     } else secondStageCards[0] = [];
    
     if (green2 > 0) {
-        secondStageCards[1] = shuffledGreenCardsStack.splice(`${-shuffledBlueCardsStack.length}`, green2);
+        secondStageCards[1] = shuffledGreenCardsStackEasy.splice(`${-shuffledBlueCardsStackEasy.length}`, green2);
     } else secondStageCards[1] = [];
     //secondStageCards[1] = shuffledGreenCardsStack.slice(-`${chosenAncientMap.secondStage.greenCards}`);
 
     if (brown2 > 0) {
-        secondStageCards[2] = shuffledBrownCardsStack.splice(`${-shuffledBrownCardsStack.length}`, brown2);
+        secondStageCards[2] = shuffledBrownCardsStackEasy.splice(`${-shuffledBrownCardsStackEasy.length}`, brown2);
     } else secondStageCards[2] = [];
     //secondStageCards[2] =  shuffledBrownCardsStack.slice(-`${chosenAncientMap.secondStage.brownCards}`);
     
     let y = secondStageCards.flat(Infinity);
-    shuffledSecondStageCards = shuffleArray(y);
+    shuffledSecondStageCardsEasy = shuffleArray(y);
     console.log(secondStageCards.flat(Infinity));
-    console.log(shuffledSecondStageCards);
-    return shuffledSecondStageCards;
+    console.log(shuffledSecondStageCardsEasy);
+    return shuffledSecondStageCardsEasy;
     
 }
 
@@ -361,29 +466,29 @@ function getCardsForThirdStage() {
     let brown3 = chosenAncientMap.thirdStage.brownCards;
 
     if (blue3 > 0) {
-    thirdStageCards[0] = shuffledBlueCardsStack.splice(`${-shuffledBrownCardsStack.length}`, blue3);
+    thirdStageCards[0] = shuffledBlueCardsStackEasy.splice(`${-shuffledBrownCardsStackEasy.length}`, blue3);
     } else secondStageCards[0] = [];
 
     if (green3 > 0) {
-        thirdStageCards[1] = shuffledGreenCardsStack.splice(`${-shuffledGreenCardsStack.length}`, green3);
+        thirdStageCards[1] = shuffledGreenCardsStackEasy.splice(`${-shuffledGreenCardsStackEasy.length}`, green3);
     } else thirdStageCards[1] = [];
 
     if(brown3 > 0) {
-        thirdStageCards[2] = shuffledBrownCardsStack.splice(`${-shuffledBrownCardsStack.length}`, brown3);
+        thirdStageCards[2] = shuffledBrownCardsStackEasy.splice(`${-shuffledBrownCardsStackEasy.length}`, brown3);
     } else thirdStageCards[2] = [];
     let z = thirdStageCards.flat(Infinity);
-    shuffledThirdStageCards = shuffleArray(z);
+    shuffledThirdStageCardsEasy = shuffleArray(z);
     console.log(thirdStageCards.flat(Infinity));
-    console.log(shuffledThirdStageCards);
-    return shuffledThirdStageCards;
+    console.log(shuffledThirdStageCardsEasy);
+    return shuffledThirdStageCardsEasy;
 }
 
-let CardsStackInPlay;
+let CardsStackInPlayEasy;
 
 function getCardsStackInPlay() {
-    CardsStackInPlay = [...shuffledThirdStageCards, ...shuffledSecondStageCards, ...shuffledfirstStageCards];
-    console.log(CardsStackInPlay);
-    return CardsStackInPlay;
+    CardsStackInPlayEasy = [...shuffledThirdStageCardsEasy, ...shuffledSecondStageCardsEasy, ...shuffledfirstStageCardsEasy];
+    console.log(CardsStackInPlayEasy);
+    return CardsStackInPlayEasy;
 }
 
 deskBack.addEventListener('click', showCard);
@@ -405,14 +510,14 @@ deskBack.addEventListener('click', showCard);
 function showCard() {
     //if (chosenAncientMap.id = 'azathoth'){
         //if(shuffledfirstStageCards > 0) { 
-            if(CardsStackInPlay.length > 0) {
-                let link = CardsStackInPlay[CardsStackInPlay.length-1].cardFace;
+            if(CardsStackInPlayEasy.length > 0) {
+                let link = CardsStackInPlayEasy[CardsStackInPlayEasy.length-1].cardFace;
                 deskFlipped.style.backgroundImage = `url(${link})`;
-                CardsStackInPlay.pop();
+                CardsStackInPlayEasy.pop();
                // if (shuffledfirstStageCards[shuffledfirstStageCards.length].color = 'green') {
 
                 //}
-                console.log(CardsStackInPlay);
+                console.log(CardsStackInPlayEasy);
                 //console.log(chosenAncientMap.firstStage.length);
     //} 
     
@@ -424,7 +529,7 @@ function showCard() {
     }
 //}
 
-    return CardsStackInPlay;
+    return CardsStackInPlayEasy;
 }
 
 btnOnloadGame.addEventListener('click', () => location.reload());
