@@ -9,7 +9,7 @@ console.log(`Сомооценка: 65 баллов
 1. Карты Древнего + 20 (в консоль выводится информация о Древнем, на карту которого был сделан клик);
 2.На выбор предоставляется несколько уровней сложности (максимум 5) + 5 (реализован только Очень легкий уровень сложности)
 3. Карты замешиваются согласно правилам игры + 40
-3. Есть трекер текущего состояния колоды - 0 баллов`);
+4. Есть трекер текущего состояния колоды - 0 баллов`);
 
 /*console.log(difficulties);
 console.log(blueCardsData);
@@ -92,7 +92,7 @@ function getDifficultyLevel(event) {
             getBlueCardStackEasy(); //получаем массив с картами по уровню сложности
             getGreenCardStackEasy();
             getBrownCardStackEasy();
-            
+            console.log(event.target.id);
             return difficulties[0]; //{id: 'very easy', name: 'Очень легкий уровень'}
      
         case 'easy':
