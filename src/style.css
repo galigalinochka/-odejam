@@ -47,20 +47,20 @@
 }
 
 #azathoth {
-    background-image: url('/assets/Ancients/Azathoth.png');  
+    background-image: url('../assets/Ancients/Azathoth.png');  
     
 }
 
 #cthulhu {
-    background-image: url('/assets/Ancients/Cthulthu.png');
+    background-image: url('../assets/Ancients/Cthulthu.png');
 }
 
 #iogSothoth {
-    background-image:url('/assets/Ancients/IogSothoth.png');
+    background-image:url('../assets/Ancients/IogSothoth.png');
 }
 
 #shubNiggurath{
-    background-image: url('/assets/Ancients/ShubNiggurath.png');
+    background-image: url('../assets/Ancients/ShubNiggurath.png');
 }
 
 .difficulty-container {
@@ -132,7 +132,7 @@
 }
 
 .desk.back {
-    background-image: url('/assets/mythicCardBackground.png');
+    background-image: url('../assets/mythicCardBackground.png');
 }
 
 
